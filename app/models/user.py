@@ -9,6 +9,9 @@ class User(db.Model):
 
     username = db.Column(db.String(100), nullable=False)
 
-    email = db.Column(db.String(120), unique=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
 
-    password = db.Column(db.String(255))
+    password = db.Column(db.String(255), nullable=False)
+
+    def __repr__(self):
+        return f"<User {self.username}>"
