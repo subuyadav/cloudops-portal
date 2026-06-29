@@ -58,3 +58,17 @@ def login():
         flash("Invalid email or password.", "danger")
 
     return render_template("login.html", form=form)
+
+# Add this at the top if not already present
+from flask import session
+
+# Add this route at the bottom of the file
+
+@auth.route("/logout")
+def logout():
+
+    session.clear()
+
+    flash("Logged out successfully.", "success")
+
+    return redirect(url_for("auth.login"))

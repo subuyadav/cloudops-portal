@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">📊 Monitoring Dashboard</h2>
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>CPU Usage</h5>
+                <h2>{{ data.cpu }}%</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Memory</h5>
+                <h2>{{ data.memory }}%</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Disk</h5>
+                <h2>{{ data.disk }}%</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center">
+            <div class="card-body">
+                <h5>Network</h5>
+                <h2>{{ data.network }} Mbps</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="card shadow">
+
+    <div class="card-header bg-success text-white">
+
+        <h5 class="mb-0">Infrastructure Health</h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Healthy Servers</th>
+                <td>{{ data.healthy_servers }}</td>
+            </tr>
+
+            <tr>
+                <th>Warning Servers</th>
+                <td>{{ data.warning_servers }}</td>
+            </tr>
+
+            <tr>
+                <th>Critical Servers</th>
+                <td>{{ data.critical_servers }}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

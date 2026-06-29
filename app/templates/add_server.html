@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+    ➕ Add Server
+
+</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-success text-white">
+
+        <h5 class="mb-0">
+
+            Server Details
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {{ form.hidden_tag() }}
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    {{ form.server_name.label(class="form-label") }}
+
+                    {{ form.server_name(class="form-control") }}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    {{ form.ip_address.label(class="form-label") }}
+
+                    {{ form.ip_address(class="form-control") }}
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    {{ form.environment.label(class="form-label") }}
+
+                    {{ form.environment(class="form-select") }}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    {{ form.operating_system.label(class="form-label") }}
+
+                    {{ form.operating_system(class="form-select") }}
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    {{ form.owner.label(class="form-label") }}
+
+                    {{ form.owner(class="form-control") }}
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    {{ form.resource_group.label(class="form-label") }}
+
+                    {{ form.resource_group(class="form-control") }}
+
+                </div>
+
+            </div>
+
+            <div class="d-grid">
+
+                {{ form.submit(class="btn btn-success btn-lg") }}
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

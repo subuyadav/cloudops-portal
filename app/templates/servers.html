@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>🖥 Server Inventory</h2>
+
+    <a href="/servers/add" class="btn btn-success">
+        + Add Server
+    </a>
+
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+
+            Server Inventory
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover table-striped">
+
+            <thead class="table-dark">
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Server Name</th>
+                    <th>IP Address</th>
+                    <th>Environment</th>
+                    <th>Operating System</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                    <th>Resource Group</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for server in servers %}
+
+                <tr>
+
+                    <td>{{ server.id }}</td>
+
+                    <td>{{ server.server_name }}</td>
+
+                    <td>{{ server.ip_address }}</td>
+
+                    <td>{{ server.environment }}</td>
+
+                    <td>{{ server.operating_system }}</td>
+
+                    <td>
+
+                        {% if server.status == "Running" %}
+
+                            <span class="badge bg-success">
+
+                                Running
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+
+                                Stopped
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>{{ server.owner }}</td>
+
+                    <td>{{ server.resource_group }}</td>
+
+                    <td>
+
+                        <a href="/servers/edit/{{ server.id }}"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a href="/servers/delete/{{ server.id }}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this server?')">
+
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
