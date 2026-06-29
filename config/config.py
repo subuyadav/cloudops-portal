@@ -1,14 +1,20 @@
 import os
 from dotenv import load_dotenv
 
-# Load .env file
 load_dotenv()
 
 class Config:
 
-    SECRET_KEY = os.getenv("SECRET_KEY")
+    SECRET_KEY = os.getenv("SECRET_KEY", "CloudOpsPortal@2026")
 
-    SQLALCHEMY_DATABASE_URI = (
+    # Use DATABASE_URL in production (Render/Neon)
+    DATABASE_URL = os.getenv("DATABASE_URL")
+
+    if DATABASE_URL:
+        # Render/Neon sometimes provide postgres:// instead of postgresql://
+        DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL or (
         f"postgresql://{os.getenv('POSTGRES_USER')}:"
         f"{os.getenv('POSTGRES_PASSWORD')}@"
         f"{os.getenv('POSTGRES_HOST')}:"
