@@ -53,7 +53,7 @@ def login():
 
             flash("Login Successful!", "success")
 
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("dashboard.dashboard_home"))
 
         flash("Invalid email or password.", "danger")
 
