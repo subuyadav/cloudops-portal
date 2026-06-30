@@ -14,6 +14,7 @@ from app.incidents.routes import incidents
 from app.monitoring.routes import monitoring
 
 from app.azure.routes import azure
+from app.models.azure_config import AzureConfig
 
 def create_app():
 
@@ -32,11 +33,12 @@ def create_app():
     app.register_blueprint(incidents)
     app.register_blueprint(monitoring)
     app.register_blueprint(azure)
+    app.register_blueprint(azure_config)
 
     # Home Page
     @app.route("/")
     def home():
-        return "🚀 CloudOps Portal is Running Successfully!"
+        return "CloudOps Portal is Running Successfully!"
 
     # Create Database Tables
     with app.app_context():
