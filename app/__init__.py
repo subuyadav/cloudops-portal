@@ -17,6 +17,9 @@ from app.azure.routes import azure
 from app.models.azure_config import AzureConfig
 from app.azure_config.routes import azure_config
 
+from app.models.audit_log import AuditLog
+from app.audit.routes import audit
+
 def create_app():
 
     app = Flask(__name__)
@@ -35,6 +38,7 @@ def create_app():
     app.register_blueprint(monitoring)
     app.register_blueprint(azure)
     app.register_blueprint(azure_config)
+    app.register_blueprint(audit)
 
     # Home Page
     @app.route("/")
