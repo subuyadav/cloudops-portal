@@ -2,6 +2,7 @@ from database.db import db
 from app.models.audit_log import AuditLog
 
 
+
 def log_action(username, action, module):
     """
     Save an audit record.

@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from app.utils.audit import log_action
 from app.auth.forms import RegistrationForm, LoginForm
 from app.models.user import User
 from database.db import db
+
+
 
 auth = Blueprint("auth", __name__)
 
@@ -51,6 +54,12 @@ def login():
             session["user_id"] = user.id
             session["username"] = user.username
 
+            log_action(
+                username=user.username,
+                action="User Logged In",
+                module="Authentication"
+)
+
             flash("Login Successful!", "success")
 
             return redirect(url_for("dashboard.dashboard_home"))
@@ -66,6 +75,15 @@ from flask import session
 
 @auth.route("/logout")
 def logout():
+
+    username = session.get("username", "Unknown")
+
+    # Save Audit Log
+    log_action(
+        username=username,
+        action="User Logged Out",
+        module="Authentication"
+    )
 
     session.clear()
 
