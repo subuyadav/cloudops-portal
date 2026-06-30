@@ -12,9 +12,10 @@ from app.models.incident import Incident
 from app.incidents.routes import incidents
 
 from app.monitoring.routes import monitoring
-
 from app.azure.routes import azure
+
 from app.models.azure_config import AzureConfig
+from app.azure_config.routes import azure_config
 
 def create_app():
 
